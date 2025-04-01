@@ -26,7 +26,12 @@ spec:
     spec:
       containers:
       - name: backend
-        image: joindevops/backend:1.0.0
+        image: naveenrajoli/backend:1.0.0
         envFrom:
         - configMapRef:
             name: backend
+
+# Images
+# naveenrajoli/backend:1.0.0 --> Blue
+# naveenrajoli/backend:2.0.0 --> Green
+# naveenrajoli/backend:3.0.0 --> Blue
