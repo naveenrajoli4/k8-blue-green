@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-svc
+  namespace: rnk-expense
+spec:
+  selector: 
+    app: frontend
+    tier: web
+    project: expense
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080

@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend-ingress
+  namespace: rnk-expense
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:135808959960:certificate/cfdd7307-aa47-4e63-bd58-8f847eab30df
+    alb.ingress.kubernetes.io/group.name: expense-ingress-group-alb
+spec:
+  ingressClassName: alb
+  rules:
+  - host: "expense-prod.naveenrajoli.site"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: frontend-svc
+            port:
+              number: 80
