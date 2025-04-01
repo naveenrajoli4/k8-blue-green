@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: backend-green
+  namespace: rnk-expense
+  labels:
+    app: backend
+    tier: backend
+    project: expense
+    version: green
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+      tier: backend
+      project: expense
+      version: green
+  template:
+    metadata:
+      labels:
+        app: backend
+        tier: backend
+        project: expense
+        version: green
+    spec:
+      containers:
+      - name: backend
+        image: naveenrajoli/backend:2.0.0
+        envFrom:
+        - configMapRef:
+            name: backend
+
+# Images
+# naveenrajoli/backend:1.0.0 --> Blue
+# naveenrajoli/backend:2.0.0 --> Green
+# naveenrajoli/backend:3.0.0 --> Blue
